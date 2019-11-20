@@ -1,8 +1,11 @@
 package com.example.demo.consume;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +39,23 @@ public class NumeroController {
 	@GetMapping("/numeros")
 	public String findAll() {
 		RestTemplate restTemplate = new RestTemplate();
-		List<Numero> numeroList = new ArrayList<Numero>();
 		Numero numero = restTemplate.getForObject("http://localhost:8080/numeros/api", Numero.class);
+		Integer []arrayNumeros = new Integer[101];
+		List<Numero> numeroList;
+		List<Integer> numeroList1 = Arrays.asList(numero.getNumeros());
 		
-		numeroList.add(numero);
-		ResponseEntity<Numero> num =restTemplate.getForEntity("http://localhost:8080/numeros/api", Numero.class);
-		System.out.println("Lista números: " + numeroList.get(0).toString());
-		System.out.println("Número Fin: " + num.getBody().getNumeroFin());
-	    return numeroList.toString();
+		for(int i=0;i<101;i++) {
+			arrayNumeros[i]=i;
+		}
+		List<Integer> numeroList2 = Arrays.asList(arrayNumeros);
+		List<Integer> numeroList3 = numeroList1.stream()
+                .filter(numeroList2::contains)
+                .collect(Collectors.toList());
+		
+		System.out.println("LISTA FINAL" + numeroList3);
+		
+		System.out.println("Objeto N�mero: " + numero.toString());
+	    return numero.toString();
 	}
 	@RequestMapping(value = "/{id}")
     public List<Numero> findAll(@PathVariable("id") Integer id) {

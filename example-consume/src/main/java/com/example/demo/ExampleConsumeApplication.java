@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import org.junit.Test;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +23,7 @@ public class ExampleConsumeApplication {
 		RestTemplate restTemplate = new RestTemplate();
 		ResponseEntity<Numero> num =restTemplate.getForEntity("http://localhost:8080/numeros/api", Numero.class);
 		
-		System.out.println("NÃºmero Fin: " + num.getBody().getNumeroFin());
+		System.out.println("Número Fin: " + num.getBody().getNumeroFin());
 	    return new RestTemplate();
 	}
 }

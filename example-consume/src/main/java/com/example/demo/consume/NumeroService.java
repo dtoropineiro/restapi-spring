@@ -15,12 +15,5 @@ public class NumeroService {
 	@Autowired
     private RestTemplate restTemplate;
 	
-	@Value("${resource.numeros}")
-	private String resource;
-	@Value("${resource.numeros}/{id}")
-	private String idResource;
 	
-	public List<Numero> findAll() {
-	    return Arrays.stream(restTemplate.getForObject(resource, Numero[].class)).collect(Collectors.toList());
-	}
 }
