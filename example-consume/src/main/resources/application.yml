@@ -1,0 +1,2 @@
+resource:
+  numeros: http://localhost:8080/numeros/api
